@@ -28,117 +28,41 @@
     }
 
     /* Cursor */
-    .cursor {
-      width: 10px; height: 10px;
-      background: var(--blue); border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9999;
-      mix-blend-mode: multiply;
-    }
-    .cursor-ring {
-      width: 36px; height: 36px;
-      border: 1.5px solid var(--blue); border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9998; opacity: 0.5;
-    }
+    .cursor { width: 10px; height: 10px; background: var(--blue); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; mix-blend-mode: multiply; }
+    .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--blue); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; opacity: 0.5; }
 
     /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.5rem 4rem;
-    }
-    nav .logo {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--ink); text-decoration: none;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; }
+    nav .logo { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
     nav ul { list-style: none; display: flex; gap: 2.5rem; }
-    nav ul li a {
-      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-      text-decoration: none; color: var(--muted); transition: color 0.2s;
-    }
+    nav ul li a { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
     nav ul li a:hover { color: var(--blue); }
 
     /* HERO */
     #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 8rem 4rem 6rem; position: relative; z-index: 2;
-    }
-    .hero-eyebrow {
-      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 1.5rem;
-      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
-    }
-    .hero-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(6rem, 12vw, 11rem); line-height: 0.9; color: var(--ink);
-      opacity: 0; animation: fadeUp 0.9s 0.5s forwards; letter-spacing: 0.02em;
-    }
+    .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 4rem 6rem; position: relative; z-index: 2; }
+    .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+    .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 12vw, 11rem); line-height: 0.9; color: var(--ink); opacity: 0; animation: fadeUp 0.9s 0.5s forwards; letter-spacing: 0.02em; }
     .hero-name span { display: block; color: var(--blue); }
-    .hero-desc {
-      margin-top: 2.5rem; font-size: 0.75rem; line-height: 1.8;
-      color: var(--muted); max-width: 360px;
-      opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
-    }
-    .hero-cta {
-      margin-top: 3rem; display: flex; gap: 1.5rem; align-items: center;
-      opacity: 0; animation: fadeUp 0.9s 0.9s forwards;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      padding: 0.9rem 2rem; background: var(--blue); color: white;
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
+    .hero-desc { margin-top: 2.5rem; font-size: 0.75rem; line-height: 1.8; color: var(--muted); max-width: 360px; opacity: 0; animation: fadeUp 0.9s 0.7s forwards; }
+    .hero-cta { margin-top: 3rem; display: flex; gap: 1.5rem; align-items: center; opacity: 0; animation: fadeUp 0.9s 0.9s forwards; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 2rem; background: var(--blue); color: white; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.2s; cursor: none; }
     .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
-    .btn-ghost {
-      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--ink); text-decoration: none;
-      border-bottom: 1px solid var(--ink); padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
+    .btn-ghost { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; cursor: none; }
     .btn-ghost:hover { color: var(--blue); border-color: var(--blue); }
-
     .hero-right { position: relative; overflow: hidden; }
-    .hero-photo {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center 20%;
-      filter: grayscale(15%) contrast(1.05);
-      transition: transform 0.8s cubic-bezier(0.23,1,0.32,1);
-    }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: grayscale(15%) contrast(1.05); transition: transform 0.8s cubic-bezier(0.23,1,0.32,1); }
     .hero-right:hover .hero-photo { transform: scale(1.03); }
-    .hero-photo-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(0,51,204,0.15) 0%, transparent 60%);
-    }
-    .hero-tag {
-      position: absolute; bottom: 4rem; right: 4rem;
-      font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: white; writing-mode: vertical-rl;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-      opacity: 0; animation: fadeIn 1s 1.2s forwards;
-    }
-    .hero-scroll {
-      position: absolute; bottom: 3rem; left: 4rem; z-index: 3;
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      opacity: 0; animation: fadeIn 1s 1.4s forwards;
-    }
+    .hero-photo-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,51,204,0.15) 0%, transparent 60%); }
+    .hero-tag { position: absolute; bottom: 4rem; right: 4rem; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: white; writing-mode: vertical-rl; text-shadow: 0 1px 4px rgba(0,0,0,0.5); opacity: 0; animation: fadeIn 1s 1.2s forwards; }
+    .hero-scroll { position: absolute; bottom: 3rem; left: 4rem; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeIn 1s 1.4s forwards; }
     .hero-scroll span { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
     .scroll-line { width: 1px; height: 48px; background: var(--blue); animation: scrollPulse 2s infinite; }
 
     /* MARQUEE */
     .marquee-wrap { background: var(--blue); overflow: hidden; padding: 1.1rem 0; }
-    .marquee-track {
-      display: flex; gap: 4rem; white-space: nowrap;
-      animation: marquee 22s linear infinite;
-    }
-    .marquee-track span {
-      font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
-      letter-spacing: 0.15em; color: white;
-      display: flex; align-items: center; gap: 4rem;
-    }
+    .marquee-track { display: flex; gap: 4rem; white-space: nowrap; animation: marquee 22s linear infinite; }
+    .marquee-track span { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em; color: white; display: flex; align-items: center; gap: 4rem; }
     .marquee-track span::after { content: '·'; color: var(--blue-mid); }
 
     /* SECTIONS */
@@ -150,17 +74,10 @@
     /* ABOUT */
     #about { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
     .about-card { background: var(--cream); padding: 4rem 3rem; position: relative; }
-    .about-card::before {
-      content: ''; position: absolute; top: -12px; left: -12px;
-      width: 100%; height: 100%; border: 1.5px solid var(--blue); z-index: -1;
-    }
+    .about-card::before { content: ''; position: absolute; top: -12px; left: -12px; width: 100%; height: 100%; border: 1.5px solid var(--blue); z-index: -1; }
     .about-quote { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-style: italic; line-height: 1.4; color: var(--ink); margin-bottom: 2rem; }
     .about-quote span { color: var(--blue); }
-    .about-meta {
-      display: flex; gap: 2rem; font-size: 0.6rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
-      border-top: 1px solid var(--blue-light); padding-top: 1.5rem;
-    }
+    .about-meta { display: flex; gap: 2rem; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--blue-light); padding-top: 1.5rem; }
     .about-meta strong { display: block; color: var(--ink); font-size: 1rem; font-family: 'DM Serif Display', serif; font-style: italic; }
     .about-text p { font-size: 0.8rem; line-height: 2; color: var(--muted); margin-bottom: 1.5rem; }
     .about-text p strong { color: var(--ink); font-weight: 500; }
@@ -171,11 +88,7 @@
     #experience .section-title { color: var(--off-white); }
     #experience .section-title em { color: var(--blue-mid); }
     .exp-grid { margin-top: 5rem; }
-    .exp-item {
-      display: grid; grid-template-columns: 180px 1fr auto;
-      gap: 3rem; align-items: start; padding: 2.5rem 0;
-      border-top: 1px solid rgba(255,255,255,0.08); transition: background 0.3s;
-    }
+    .exp-item { display: grid; grid-template-columns: 180px 1fr auto; gap: 3rem; align-items: start; padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,0.08); transition: background 0.3s; }
     .exp-item:hover { background: rgba(0,51,204,0.1); }
     .exp-item:hover .exp-arrow { opacity: 1; transform: translateX(0); }
     .exp-date { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--blue-mid); padding-top: 0.3rem; }
@@ -199,28 +112,123 @@
     .lang-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-style: italic; color: var(--ink); }
     .lang-level { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); }
 
-    /* PROJECTS */
+    /* ── PROJECTS ── */
     #projects { background: var(--off-white); }
     .projects-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-bottom: 5rem; align-items: end; }
     .projects-note { font-size: 0.75rem; line-height: 1.9; color: var(--muted); }
+
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-    .project-card { position: relative; overflow: hidden; aspect-ratio: 4/3; background: var(--cream); cursor: none; }
-    .project-card-inner {
-      position: absolute; inset: 0; padding: 2.5rem;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.4s;
+
+    /* Project card — clickable */
+    .project-card {
+      position: relative; overflow: hidden; aspect-ratio: 4/3;
+      background: var(--cream); cursor: none;
     }
-    .project-card:hover .project-card-inner { opacity: 1; }
+    .project-card.featured { grid-column: span 2; aspect-ratio: 16/7; }
+
     .project-card-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.6s cubic-bezier(0.23,1,0.32,1); }
     .project-card:hover .project-card-bg { transform: scale(1.04); }
     .project-bg-text { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(0,51,204,0.12); line-height: 1; user-select: none; }
-    .project-number { position: absolute; top: 2rem; left: 2.5rem; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--blue); }
-    .project-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.5rem; }
-    .project-title-card { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: white; line-height: 1.2; }
-    .project-card.featured { grid-column: span 2; aspect-ratio: 16/7; }
     .project-card.featured .project-bg-text { font-size: 14rem; }
-    .project-card.featured .project-title-card { font-size: 2.5rem; }
+
+    .project-number { position: absolute; top: 2rem; left: 2.5rem; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--blue); z-index: 2; }
+
+    /* Hover overlay */
+    .project-card-inner {
+      position: absolute; inset: 0; padding: 2.5rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.3) 60%, transparent 100%);
+      opacity: 0; transition: opacity 0.35s;
+      z-index: 3;
+    }
+    .project-card:hover .project-card-inner { opacity: 1; }
+
+    .project-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.5rem; }
+    .project-title-card { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: white; line-height: 1.2; margin-bottom: 1.2rem; }
+    .project-card.featured .project-title-card { font-size: 2.2rem; }
+
+    .project-actions { display: flex; gap: 1rem; align-items: center; }
+
+    .btn-preview {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.4rem; background: var(--blue); color: white;
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: none; cursor: none; transition: background 0.2s;
+    }
+    .btn-preview:hover { background: var(--blue-dark); }
+
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.4); color: white;
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-download:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+    /* No-PDF card (project 3) — just visual */
+    .project-card.no-pdf .btn-preview,
+    .project-card.no-pdf .btn-download { display: none; }
+
+    /* ── PDF MODAL ── */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,15,30,0.92);
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+      cursor: none;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+    .modal-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--ink);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: white; letter-spacing: 0.05em; }
+    .modal-bar-right { display: flex; align-items: center; gap: 1rem; }
+
+    .modal-download {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 1.2rem; background: var(--blue); color: white;
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .modal-download:hover { background: var(--blue-dark); }
+
+    .modal-close {
+      width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.2);
+      background: none; color: white; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .modal-close:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+    .modal-body { flex: 1; overflow: hidden; position: relative; }
+    .modal-body iframe {
+      width: 100%; height: 100%; border: none; display: block;
+    }
+
+    /* Loading state inside modal */
+    .modal-loading {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem; color: rgba(255,255,255,0.4);
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      background: var(--ink);
+      transition: opacity 0.4s;
+    }
+    .modal-loading.hidden { opacity: 0; pointer-events: none; }
+    .loader {
+      width: 32px; height: 32px; border: 2px solid rgba(0,51,204,0.3);
+      border-top-color: var(--blue); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
 
     /* EDUCATION */
     #education { background: var(--ink); color: white; }
@@ -260,12 +268,11 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @keyframes scrollPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* SCROLL REVEAL */
     .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 1.5rem 2rem; }
       nav ul { display: none; }
@@ -279,6 +286,7 @@
       .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
       .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .modal-bar { padding: 1rem; }
     }
   </style>
 </head>
@@ -287,6 +295,25 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
+  <!-- PDF MODAL -->
+  <div class="modal-backdrop" id="pdfModal">
+    <div class="modal-bar">
+      <span class="modal-title" id="modalTitle">Project</span>
+      <div class="modal-bar-right">
+        <a href="#" class="modal-download" id="modalDownload" download>↓ Download PDF</a>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-loading" id="modalLoading">
+        <div class="loader"></div>
+        <span>Loading PDF</span>
+      </div>
+      <iframe id="pdfFrame" src="" title="PDF Preview"></iframe>
+    </div>
+  </div>
+
+  <!-- NAV -->
   <nav>
     <a href="#" class="logo">NM — Portfolio</a>
     <ul>
@@ -298,6 +325,7 @@
     </ul>
   </nav>
 
+  <!-- HERO -->
   <section id="hero">
     <div class="hero-left">
       <p class="hero-eyebrow">Fashion Management · Design · Strategy</p>
@@ -319,12 +347,14 @@
     </div>
   </section>
 
+  <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
       <span>Fashion Management</span><span>Visual Merchandising</span><span>Brand Strategy</span><span>Trend Analysis</span><span>Luxury Retail</span><span>Sustainability</span><span>Fashion-Tech</span><span>Creative Direction</span><span>Fashion Management</span><span>Visual Merchandising</span><span>Brand Strategy</span><span>Trend Analysis</span><span>Luxury Retail</span><span>Sustainability</span><span>Fashion-Tech</span><span>Creative Direction</span>
     </div>
   </div>
 
+  <!-- ABOUT -->
   <section id="about">
     <div class="about-visual reveal">
       <div class="about-card">
@@ -346,6 +376,7 @@
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="reveal">
       <p class="section-label">Work Experience</p>
@@ -391,6 +422,7 @@
     </div>
   </section>
 
+  <!-- SKILLS -->
   <section id="skills">
     <div class="reveal">
       <p class="section-label">Skills &amp; Languages</p>
@@ -432,42 +464,67 @@
     </div>
   </section>
 
+  <!-- PROJECTS -->
   <section id="projects">
     <div class="projects-intro">
       <div class="reveal">
         <p class="section-label">Selected Projects</p>
         <h2 class="section-title">Creative<br /><em>work &amp; ideas.</em></h2>
       </div>
-      <p class="projects-note reveal">A selection of academic and personal projects that reflect my approach to fashion, strategy, and storytelling. From editorial concepts to retail innovation — each piece is a statement.</p>
+      <p class="projects-note reveal">A selection of academic and personal projects — click any card to preview the full work directly in your browser, or download it.</p>
     </div>
+
     <div class="project-grid">
-      <div class="project-card featured reveal">
+
+      <!-- Card 1: House of Denim — featured, with PDF -->
+      <div class="project-card featured reveal"
+           data-pdf="house-of-denim.pdf"
+           data-title="House of Denim — 2026 Edition">
         <div class="project-card-bg"><div class="project-bg-text">DENIM</div></div>
         <div class="project-number">01</div>
         <div class="project-card-inner">
           <p class="project-label">Future Retail · 2026</p>
           <h3 class="project-title-card">House of Denim — Curation &amp; Culture</h3>
+          <div class="project-actions">
+            <button class="btn-preview">⊕ Preview</button>
+            <a class="btn-download" href="house-of-denim.pdf" download>↓ Download</a>
+          </div>
         </div>
       </div>
-      <div class="project-card reveal">
+
+      <!-- Card 2: Retro Futurism — with PDF -->
+      <div class="project-card reveal"
+           data-pdf="retro-futurism.pdf"
+           data-title="Retro Futurism — Vintage × Sustainable Fashion">
         <div class="project-card-bg"><div class="project-bg-text">RETRO</div></div>
         <div class="project-number">02</div>
         <div class="project-card-inner">
           <p class="project-label">Fashion Editorial · 2024</p>
           <h3 class="project-title-card">Retro Futurism — Vintage × Sustainable Fashion</h3>
+          <div class="project-actions">
+            <button class="btn-preview">⊕ Preview</button>
+            <a class="btn-download" href="retro-futurism.pdf" download>↓ Download</a>
+          </div>
         </div>
       </div>
-      <div class="project-card reveal">
+
+      <!-- Card 3: Think & Style — no PDF, visual only -->
+      <div class="project-card no-pdf reveal">
         <div class="project-card-bg"><div class="project-bg-text">THINK</div></div>
         <div class="project-number">03</div>
         <div class="project-card-inner">
           <p class="project-label">Portfolio Concept · 2024</p>
           <h3 class="project-title-card">Think &amp; Style — Heritage meets Sustainability</h3>
+          <div class="project-actions">
+            <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Coming soon</span>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
+  <!-- EDUCATION -->
   <section id="education">
     <div class="reveal">
       <p class="section-label">Education</p>
@@ -498,6 +555,7 @@
     </div>
   </section>
 
+  <!-- EXTRAS -->
   <section id="extras">
     <div class="reveal">
       <p class="section-label">Extracurricular</p>
@@ -517,6 +575,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <p class="section-label">Contact</p>
     <p class="contact-big">Let's<br />Talk.</p>
@@ -547,6 +606,7 @@
   </footer>
 
   <script>
+    // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
@@ -557,10 +617,61 @@
       ring.style.transform = `translate(${rx-18}px,${ry-18}px)`;
       requestAnimationFrame(tick);
     })();
+
+    // Scroll reveal
     const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i*80); });
+      entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // PDF Modal
+    const modal      = document.getElementById('pdfModal');
+    const pdfFrame   = document.getElementById('pdfFrame');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDl    = document.getElementById('modalDownload');
+    const modalClose = document.getElementById('modalClose');
+    const modalLoad  = document.getElementById('modalLoading');
+
+    function openModal(pdfSrc, title) {
+      modalTitle.textContent = title;
+      modalDl.href = pdfSrc;
+      modalDl.download = pdfSrc;
+      pdfFrame.src = '';
+      modalLoad.classList.remove('hidden');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // slight delay so browser registers the src change
+      setTimeout(() => { pdfFrame.src = pdfSrc; }, 80);
+      pdfFrame.onload = () => modalLoad.classList.add('hidden');
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { pdfFrame.src = ''; }, 300);
+    }
+
+    // Attach to preview buttons
+    document.querySelectorAll('.project-card[data-pdf]').forEach(card => {
+      const btn = card.querySelector('.btn-preview');
+      if (!btn) return;
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        openModal(card.dataset.pdf, card.dataset.title);
+      });
+    });
+
+    // Also allow clicking anywhere on the card (except download link)
+    document.querySelectorAll('.project-card[data-pdf]').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.classList.contains('btn-download') || e.target.closest('.btn-download')) return;
+        openModal(card.dataset.pdf, card.dataset.title);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   </script>
 </body>
 </html>
