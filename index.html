@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Niklas Moll — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue: #0033CC;
+      --blue-light: #B3C6FF;
+      --blue-mid: #809FFF;
+      --blue-dark: #0022AA;
+      --off-white: #F5F4F0;
+      --cream: #EEECE6;
+      --ink: #0F172A;
+      --muted: #64748B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Mono', monospace;
+      background: var(--off-white);
+      color: var(--ink);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Cursor */
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--blue); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--blue); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998; opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+    }
+    nav .logo {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--ink); text-decoration: none;
+    }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+    nav ul li a {
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; color: var(--muted); transition: color 0.2s;
+    }
+    nav ul li a:hover { color: var(--blue); }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 8rem 4rem 6rem; position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+    }
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 12vw, 11rem); line-height: 0.9; color: var(--ink);
+      opacity: 0; animation: fadeUp 0.9s 0.5s forwards; letter-spacing: 0.02em;
+    }
+    .hero-name span { display: block; color: var(--blue); }
+    .hero-desc {
+      margin-top: 2.5rem; font-size: 0.75rem; line-height: 1.8;
+      color: var(--muted); max-width: 360px;
+      opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+    }
+    .hero-cta {
+      margin-top: 3rem; display: flex; gap: 1.5rem; align-items: center;
+      opacity: 0; animation: fadeUp 0.9s 0.9s forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 2rem; background: var(--blue); color: white;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-ghost {
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
+      border-bottom: 1px solid var(--ink); padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--blue); border-color: var(--blue); }
+
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-photo {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 20%;
+      filter: grayscale(15%) contrast(1.05);
+      transition: transform 0.8s cubic-bezier(0.23,1,0.32,1);
+    }
+    .hero-right:hover .hero-photo { transform: scale(1.03); }
+    .hero-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,51,204,0.15) 0%, transparent 60%);
+    }
+    .hero-tag {
+      position: absolute; bottom: 4rem; right: 4rem;
+      font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: white; writing-mode: vertical-rl;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      opacity: 0; animation: fadeIn 1s 1.2s forwards;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 3rem; left: 4rem; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0; animation: fadeIn 1s 1.4s forwards;
+    }
+    .hero-scroll span { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .scroll-line { width: 1px; height: 48px; background: var(--blue); animation: scrollPulse 2s infinite; }
+
+    /* MARQUEE */
+    .marquee-wrap { background: var(--blue); overflow: hidden; padding: 1.1rem 0; }
+    .marquee-track {
+      display: flex; gap: 4rem; white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+      letter-spacing: 0.15em; color: white;
+      display: flex; align-items: center; gap: 4rem;
+    }
+    .marquee-track span::after { content: '·'; color: var(--blue-mid); }
+
+    /* SECTIONS */
+    section { padding: 8rem 4rem; }
+    .section-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; color: var(--ink); }
+    .section-title em { font-style: italic; color: var(--blue); }
+
+    /* ABOUT */
+    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
+    .about-card { background: var(--cream); padding: 4rem 3rem; position: relative; }
+    .about-card::before {
+      content: ''; position: absolute; top: -12px; left: -12px;
+      width: 100%; height: 100%; border: 1.5px solid var(--blue); z-index: -1;
+    }
+    .about-quote { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-style: italic; line-height: 1.4; color: var(--ink); margin-bottom: 2rem; }
+    .about-quote span { color: var(--blue); }
+    .about-meta {
+      display: flex; gap: 2rem; font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      border-top: 1px solid var(--blue-light); padding-top: 1.5rem;
+    }
+    .about-meta strong { display: block; color: var(--ink); font-size: 1rem; font-family: 'DM Serif Display', serif; font-style: italic; }
+    .about-text p { font-size: 0.8rem; line-height: 2; color: var(--muted); margin-bottom: 1.5rem; }
+    .about-text p strong { color: var(--ink); font-weight: 500; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--ink); color: var(--off-white); }
+    #experience .section-label { color: var(--blue-mid); }
+    #experience .section-title { color: var(--off-white); }
+    #experience .section-title em { color: var(--blue-mid); }
+    .exp-grid { margin-top: 5rem; }
+    .exp-item {
+      display: grid; grid-template-columns: 180px 1fr auto;
+      gap: 3rem; align-items: start; padding: 2.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.08); transition: background 0.3s;
+    }
+    .exp-item:hover { background: rgba(0,51,204,0.1); }
+    .exp-item:hover .exp-arrow { opacity: 1; transform: translateX(0); }
+    .exp-date { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--blue-mid); padding-top: 0.3rem; }
+    .exp-company { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.05em; color: var(--off-white); line-height: 1; }
+    .exp-role { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.4rem; text-transform: uppercase; }
+    .exp-details { font-size: 0.7rem; line-height: 1.8; color: rgba(255,255,255,0.45); margin-top: 0.8rem; max-width: 520px; }
+    .exp-arrow { font-size: 1.5rem; color: var(--blue); opacity: 0; transform: translateX(-8px); transition: opacity 0.3s, transform 0.3s; align-self: center; }
+
+    /* SKILLS */
+    #skills { background: var(--cream); }
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-top: 5rem; align-items: start; }
+    .skill-category { margin-bottom: 3rem; }
+    .skill-category-title { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--blue-light); }
+    .skill-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .skill-name { font-size: 0.75rem; color: var(--ink); }
+    .skill-bar { width: 120px; height: 2px; background: var(--blue-light); position: relative; }
+    .skill-bar-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--blue); }
+    .skill-level { font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); min-width: 70px; text-align: right; }
+    .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .lang-item { padding: 1.5rem; background: white; display: flex; flex-direction: column; gap: 0.4rem; }
+    .lang-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-style: italic; color: var(--ink); }
+    .lang-level { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); }
+
+    /* PROJECTS */
+    #projects { background: var(--off-white); }
+    .projects-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-bottom: 5rem; align-items: end; }
+    .projects-note { font-size: 0.75rem; line-height: 1.9; color: var(--muted); }
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .project-card { position: relative; overflow: hidden; aspect-ratio: 4/3; background: var(--cream); cursor: none; }
+    .project-card-inner {
+      position: absolute; inset: 0; padding: 2.5rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .project-card:hover .project-card-inner { opacity: 1; }
+    .project-card-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.6s cubic-bezier(0.23,1,0.32,1); }
+    .project-card:hover .project-card-bg { transform: scale(1.04); }
+    .project-bg-text { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(0,51,204,0.12); line-height: 1; user-select: none; }
+    .project-number { position: absolute; top: 2rem; left: 2.5rem; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--blue); }
+    .project-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.5rem; }
+    .project-title-card { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: white; line-height: 1.2; }
+    .project-card.featured { grid-column: span 2; aspect-ratio: 16/7; }
+    .project-card.featured .project-bg-text { font-size: 14rem; }
+    .project-card.featured .project-title-card { font-size: 2.5rem; }
+
+    /* EDUCATION */
+    #education { background: var(--ink); color: white; }
+    #education .section-label { color: var(--blue-mid); }
+    #education .section-title { color: white; }
+    #education .section-title em { color: var(--blue-mid); }
+    .edu-list { margin-top: 5rem; }
+    .edu-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,0.07); align-items: start; }
+    .edu-year { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--blue-mid); padding-top: 0.3rem; }
+    .edu-institution { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: white; line-height: 1; }
+    .edu-degree { font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem; letter-spacing: 0.05em; }
+
+    /* EXTRAS */
+    #extras { background: var(--cream); }
+    .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem; }
+    .extra-card { padding: 2.5rem; background: white; border-left: 3px solid var(--blue); position: relative; overflow: hidden; }
+    .extra-card::after { content: attr(data-year); position: absolute; bottom: -0.5rem; right: 1rem; font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: var(--blue-light); line-height: 1; pointer-events: none; }
+    .extra-org { font-family: 'DM Serif Display', serif; font-size: 1.3rem; font-style: italic; color: var(--ink); margin-bottom: 0.4rem; }
+    .extra-role { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
+    .extra-desc { font-size: 0.72rem; line-height: 1.8; color: var(--muted); position: relative; z-index: 1; }
+
+    /* CONTACT */
+    #contact { background: var(--blue); color: white; text-align: center; padding: 10rem 4rem; }
+    #contact .section-label { color: var(--blue-light); }
+    .contact-big { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 10vw, 9rem); color: white; line-height: 0.9; margin: 2rem 0 3rem; letter-spacing: 0.02em; }
+    .contact-links { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .contact-link { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-decoration: none; color: white; transition: opacity 0.2s; }
+    .contact-link:hover { opacity: 0.7; }
+    .contact-link-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); }
+    .contact-link-value { font-size: 0.8rem; font-weight: 500; }
+
+    /* FOOTER */
+    footer { background: var(--ink); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes scrollPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; }
+      nav ul { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { height: 50vh; }
+      .hero-left { padding: 7rem 2rem 5rem; }
+      section { padding: 5rem 2rem; }
+      #about, .skills-layout, .projects-intro, .extras-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; aspect-ratio: 4/3; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="#" class="logo">NM — Portfolio</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Fashion Management · Design · Strategy</p>
+      <h1 class="hero-name">Niklas<span>Moll.</span></h1>
+      <p class="hero-desc">Fashion student, creative strategist &amp; brand thinker. Bridging luxury heritage with the future of retail — from Chanel's atelier to the cutting edge of fashion-tech.</p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn-primary">View Work →</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="photo.jpg" alt="Niklas Moll" class="hero-photo" />
+      <div class="hero-photo-overlay"></div>
+      <div class="hero-tag">Fashion · Strategy · Identity</div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Fashion Management</span><span>Visual Merchandising</span><span>Brand Strategy</span><span>Trend Analysis</span><span>Luxury Retail</span><span>Sustainability</span><span>Fashion-Tech</span><span>Creative Direction</span><span>Fashion Management</span><span>Visual Merchandising</span><span>Brand Strategy</span><span>Trend Analysis</span><span>Luxury Retail</span><span>Sustainability</span><span>Fashion-Tech</span><span>Creative Direction</span>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="about-visual reveal">
+      <div class="about-card">
+        <p class="about-quote">"Reviving the past —<span> shaping the future."</span></p>
+        <div class="about-meta">
+          <div><strong>2+</strong>Years Industry Exp.</div>
+          <div><strong>3</strong>Major Brands</div>
+          <div><strong>2027</strong>Expected Grad.</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <p class="section-label">About</p>
+      <h2 class="section-title">Driven by<br /><em>fashion &amp; culture.</em></h2>
+      <br/>
+      <p>I'm <strong>Niklas Moll</strong>, a Fashion Management student at Texoversum Nagold with a background spanning premium automotive retail, Mercedes-Benz marketing, and hands-on experience at <strong>Chanel GmbH</strong> in Munich.</p>
+      <p>My work lives at the intersection of <strong>brand storytelling, visual identity, and strategic thinking</strong>. I believe the best fashion experiences are built on a sophisticated blend of timeless elegance and forward-thinking innovation.</p>
+      <p>Beyond academics, I founded the <strong>X Run Club</strong> in Nagold — a community of 25+ members — and am an active member of Duchesse Nagold e.V., staying connected to the pulse of the fashion and textiles industry.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="reveal">
+      <p class="section-label">Work Experience</p>
+      <h2 class="section-title">Where I've<br /><em>left my mark.</em></h2>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-item reveal">
+        <div class="exp-date">Apr 2024 – Sep 2024</div>
+        <div>
+          <div class="exp-company">Chanel GmbH</div>
+          <div class="exp-role">Working Student · Fashion &amp; Visual Merchandising</div>
+          <div class="exp-details">Co-planned and executed visual merchandising concepts for store layout and product placement. Implemented brand guidelines in-store to ensure premium presentation and a consistent, elevated customer experience.</div>
+        </div>
+        <div class="exp-arrow">→</div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Sep 2019 – Sep 2020</div>
+        <div>
+          <div class="exp-company">Mercedes-Benz</div>
+          <div class="exp-role">Social Media Manager · Autohaus Oppel GmbH</div>
+          <div class="exp-details">Built the dealership's social media presence from scratch in line with Mercedes-Benz CI. Planned and scheduled content with Hootsuite &amp; Social Hub, tracking engagement metrics to refine strategy.</div>
+        </div>
+        <div class="exp-arrow">→</div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Jul – Sep 2019</div>
+        <div>
+          <div class="exp-company">Mercedes-Benz</div>
+          <div class="exp-role">Marketing Assistant · Autohaus Oppel GmbH</div>
+          <div class="exp-details">Supported design and content preparation for the dealership's customer magazine and marketing materials in line with Mercedes-Benz CI.</div>
+        </div>
+        <div class="exp-arrow">→</div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Jan 2017 – Jul 2019</div>
+        <div>
+          <div class="exp-company">Mercedes-Benz</div>
+          <div class="exp-role">Trainee Car Salesman · Autohaus Oppel GmbH</div>
+          <div class="exp-details">Handled test drives and supported sales closures in premium automotive retail. Assisted local marketing campaigns, events, and vehicle disposition for new and used cars.</div>
+        </div>
+        <div class="exp-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="reveal">
+      <p class="section-label">Skills &amp; Languages</p>
+      <h2 class="section-title">What I<br /><em>bring to the table.</em></h2>
+    </div>
+    <div class="skills-layout">
+      <div>
+        <div class="skill-category reveal">
+          <div class="skill-category-title">Fashion &amp; Industry</div>
+          <div class="skill-item"><span class="skill-name">Fashion &amp; Luxury Expertise</span><div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div><span class="skill-level">Skillful</span></div>
+          <div class="skill-item"><span class="skill-name">Market Research &amp; Trend Analysis</span><div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div><span class="skill-level">Experienced</span></div>
+          <div class="skill-item"><span class="skill-name">Fashion-Tech Knowledge</span><div class="skill-bar"><div class="skill-bar-fill" style="width:72%"></div></div><span class="skill-level">Skillful</span></div>
+          <div class="skill-item"><span class="skill-name">Sustainability &amp; ESG</span><div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div><span class="skill-level">Skillful</span></div>
+        </div>
+        <div class="skill-category reveal">
+          <div class="skill-category-title">Business &amp; Strategy</div>
+          <div class="skill-item"><span class="skill-name">Communication &amp; Presentation</span><div class="skill-bar"><div class="skill-bar-fill" style="width:88%"></div></div><span class="skill-level">Experienced</span></div>
+          <div class="skill-item"><span class="skill-name">Networking &amp; Relationship Mgmt</span><div class="skill-bar"><div class="skill-bar-fill" style="width:95%"></div></div><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Strategic Analysis</span><div class="skill-bar"><div class="skill-bar-fill" style="width:50%"></div></div><span class="skill-level">Beginner</span></div>
+          <div class="skill-item"><span class="skill-name">Data Analysis</span><div class="skill-bar"><div class="skill-bar-fill" style="width:42%"></div></div><span class="skill-level">Beginner</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-category reveal">
+          <div class="skill-category-title">Languages</div>
+          <div class="lang-grid">
+            <div class="lang-item"><span class="lang-name">German</span><span class="lang-level">Native</span></div>
+            <div class="lang-item"><span class="lang-name">English</span><span class="lang-level">Fluent</span></div>
+            <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-level">Basic</span></div>
+            <div class="lang-item"><span class="lang-name">French</span><span class="lang-level">Basic</span></div>
+          </div>
+        </div>
+        <div class="skill-category reveal">
+          <div class="skill-category-title">Tools &amp; Platforms</div>
+          <div class="skill-item"><span class="skill-name">macOS / Adobe Suite</span><div class="skill-bar"><div class="skill-bar-fill" style="width:78%"></div></div><span class="skill-level">Proficient</span></div>
+          <div class="skill-item"><span class="skill-name">Hootsuite / Social Hub</span><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div><span class="skill-level">Experienced</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="projects-intro">
+      <div class="reveal">
+        <p class="section-label">Selected Projects</p>
+        <h2 class="section-title">Creative<br /><em>work &amp; ideas.</em></h2>
+      </div>
+      <p class="projects-note reveal">A selection of academic and personal projects that reflect my approach to fashion, strategy, and storytelling. From editorial concepts to retail innovation — each piece is a statement.</p>
+    </div>
+    <div class="project-grid">
+      <div class="project-card featured reveal">
+        <div class="project-card-bg"><div class="project-bg-text">DENIM</div></div>
+        <div class="project-number">01</div>
+        <div class="project-card-inner">
+          <p class="project-label">Future Retail · 2026</p>
+          <h3 class="project-title-card">House of Denim — Curation &amp; Culture</h3>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-card-bg"><div class="project-bg-text">RETRO</div></div>
+        <div class="project-number">02</div>
+        <div class="project-card-inner">
+          <p class="project-label">Fashion Editorial · 2024</p>
+          <h3 class="project-title-card">Retro Futurism — Vintage × Sustainable Fashion</h3>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-card-bg"><div class="project-bg-text">THINK</div></div>
+        <div class="project-number">03</div>
+        <div class="project-card-inner">
+          <p class="project-label">Portfolio Concept · 2024</p>
+          <h3 class="project-title-card">Think &amp; Style — Heritage meets Sustainability</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="reveal">
+      <p class="section-label">Education</p>
+      <h2 class="section-title">Building the<br /><em>foundation.</em></h2>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item reveal">
+        <div class="edu-year">Oct 2024 – Present</div>
+        <div>
+          <div class="edu-institution">Texoversum Nagold</div>
+          <div class="edu-degree">B.A. Fashion Management — Strategic Management, Trend Analysis, Retail Operations &amp; Digitalization · Expected May 2027</div>
+        </div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-year">Oct 2021 – Sep 2024</div>
+        <div>
+          <div class="edu-institution">HAW Landshut</div>
+          <div class="edu-degree">B.A. Business Management (without degree) — Business Administration, Marketing, Strategy Development</div>
+        </div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-year">Sep 2019 – Sep 2020</div>
+        <div>
+          <div class="edu-institution">State BOS Ansbach</div>
+          <div class="edu-degree">Upper Secondary School (Abitur / Fachabitur) — Focus: Business Administration</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="extras">
+    <div class="reveal">
+      <p class="section-label">Extracurricular</p>
+      <h2 class="section-title">Beyond the<br /><em>classroom.</em></h2>
+    </div>
+    <div class="extras-grid">
+      <div class="extra-card reveal" data-year="25">
+        <div class="extra-org">X Run Club</div>
+        <div class="extra-role">Founder · Aug 2025 – Present · Nagold</div>
+        <p class="extra-desc">Established a local running community with 25+ members. Organising weekly runs and networking sessions to promote health, connection, and team spirit.</p>
+      </div>
+      <div class="extra-card reveal" data-year="25">
+        <div class="extra-org">Duchesse Nagold e.V.</div>
+        <div class="extra-role">Member · Dec 2025 – Present · Nagold</div>
+        <p class="extra-desc">Active participation in networking events, annual general meetings, and industry forums focused on fashion and textiles.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <p class="contact-big">Let's<br />Talk.</p>
+    <div class="contact-links">
+      <a href="mailto:nikmoll2@icloud.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">nikmoll2@icloud.com</span>
+      </a>
+      <a href="tel:+4915157822443" class="contact-link">
+        <span class="contact-link-label">Phone</span>
+        <span class="contact-link-value">+49 151 578 22443</span>
+      </a>
+      <a href="https://www.linkedin.com/public-profile/settings/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact_info%3BSPURRnhXQEabnycltHBqrQ%3D%3D" target="_blank" class="contact-link">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-value">Niklas Moll</span>
+      </a>
+      <a href="https://instagram.com/justdiscoveredfuture" target="_blank" class="contact-link">
+        <span class="contact-link-label">Instagram</span>
+        <span class="contact-link-value">@justdiscoveredfuture</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Niklas Moll</span>
+    <span>Fashion Management · Strategy · Creative Direction</span>
+    <span>Nagold, Germany</span>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function tick() {
+      cursor.style.transform = `translate(${mx-5}px,${my-5}px)`;
+      rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+      ring.style.transform = `translate(${rx-18}px,${ry-18}px)`;
+      requestAnimationFrame(tick);
+    })();
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i*80); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
